@@ -1,10 +1,12 @@
 let moves = ["Rock", "Paper", "Scissors"];
 let computerMove;
 let playerMove;
+let playerScore = 0;
+let computerScore = 0;
 
 function computerPlay()
 {  
-  computerMove = moves[Math.floor(Math.random()*2)];
+  computerMove = moves[Math.floor(Math.random()*2.999)];
   console.log("Computer plays " + computerMove + ".");
   return computerMove;
 }
@@ -34,51 +36,81 @@ function playerPlay()
   return playerMove;
 }
 
+function playerWins()
+{
+  console.log("Player wins !")
+  playerScore++;
+  alert('Player wins ! > Player : ' + playerScore + ' - Computer : ' + computerScore );     
+}
+
+function computerWins()
+{
+  console.log("Computer wins !")
+  computerScore++;
+  alert('Computer wins ! > Player : ' + playerScore + ' - Computer : ' + computerScore );     
+}
+
 function computeResult(playerMove, computerMove)
 {
   console.log("Player: " + playerMove + " vs Computer : " + computerMove);
   if (playerMove == computerMove)
     {
-      console.log("DRAW !")
+      console.log("DRAW !");
+      alert('DRAW ! > Player : ' + playerScore + ' - Computer : ' + computerScore );
     }
   else if (playerMove == "Rock")
     {
       if (computerMove == "Paper")
       {
-          console.log("Computer wins !")
+        computerWins();           
       }        
       else
         {
-        console.log("Player wins !")
+          playerWins();        
         }
     }
   else if (playerMove == "Paper")
     {
       if (computerMove == "Scissors")
       {
-          console.log("Computer wins !")
+        computerWins();        
       }        
       else
         {
-        console.log("Player wins !")
+          playerWins();               
         }
     }
   else
     {
     if (computerMove == "Rock")
       {
-          console.log("Computer wins !")
+        computerWins();          
       }        
       else
         {
-        console.log("Player wins !")
+          playerWins();               
         }
     }
 }
 
-playerMove = playerPlay();
-computerMove = computerPlay();
-computeResult(playerMove, computerMove);
+
+function game()
+{
+  let roundNb = 0;
+  let nbOfRounds = prompt('How many rounds do you want to play?');
+  
+  while (roundNb < nbOfRounds)
+     {
+      roundNb++;
+      playerMove = playerPlay();
+      computerMove = computerPlay();
+      computeResult(playerMove, computerMove);      
+     }
+}
+
+game();
+
+
 
 
 
